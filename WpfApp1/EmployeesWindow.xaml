@@ -1,0 +1,569 @@
+﻿<Window x:Class="WpfApp1.EmployeesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Сотрудники" 
+        Height="800" 
+        Width="1400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F6F6F6"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        BorderThickness="10"
+        BorderBrush="#F6F6F6">
+
+    <!-- Скругленные углы окна -->
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,1400,800" RadiusX="20" RadiusY="20"/>
+    </Window.Clip>
+
+    <!-- Стили -->
+    <Window.Resources>
+        <Style x:Key="BackButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WhiteActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#65558F"/>
+            <Setter Property="FontFamily" Value="supporting-text"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="30,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#F6F6F6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Верхняя панель с информацией о пользователе и кнопкой закрытия -->
+        <Grid Margin="30,10,30,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Информация о текущем пользователе справа -->
+            
+            <Border Grid.Column="1" 
+        Background="#FFFFFF" 
+        CornerRadius="10" 
+        Padding="15,10"
+        BorderThickness="1"
+        BorderBrush="#E0E0E0"
+        VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Аватар или иконка -->
+                    <Border Width="32"
+                Height="32"
+                Background="#65558F"
+                CornerRadius="16"
+                Margin="0,0,10,0">
+                        <TextBlock Text="👤"
+                      FontSize="14"
+                      Foreground="White"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Информация о пользователе -->
+                    <StackPanel>
+                        <TextBlock x:Name="CurrentUserNameText"
+                      FontFamily="supporting-text"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="#333333"/>
+                        <TextBlock x:Name="CurrentUserRoleText"
+                      FontFamily="supporting-text"
+                      FontSize="10"
+                      Foreground="#65558F"
+                      Margin="0,2,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Кнопка закрытия программы -->
+        <Button Click="CloseAppButton_Click"
+                Width="40"
+                Height="40"
+                Cursor="Hand"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,-3,-112,0"
+                Background="Transparent"
+                BorderThickness="0">
+            <TextBlock Text="✕"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#666666"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="#666666"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                <Setter Property="Foreground" Value="#FF0000"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Button>
+
+        <!-- Основное содержимое -->
+        <Grid Margin="30,60,30,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель с заголовком и кнопкой назад -->
+            <Grid Grid.Row="0" Margin="0,0,0,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Кнопка назад -->
+                <Button Grid.Column="0"
+                        Style="{StaticResource BackButtonStyle}"
+                        Click="BackButton_Click"
+                        Width="40"
+                        Height="40"
+                        Cursor="Hand"
+                        Margin="0,0,20,0">
+                    <TextBlock Text="←"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="#65558F"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#65558F"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Button}}" Value="True">
+                                        <Setter Property="Foreground" Value="#4A3C6B"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Button>
+
+                <!-- Заголовок -->
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Сотрудники"
+                              FontFamily="supporting-text"
+                              FontSize="24"
+                              FontWeight="Bold"
+                              Foreground="#333333"/>
+                    <TextBlock Text="Добавление нового сотрудника"
+                              FontFamily="supporting-text"
+                              FontSize="16"
+                              Foreground="#666666"
+                              Margin="0,10,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Основное содержимое -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Левая часть - форма добавления сотрудника -->
+                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,30,0">
+                    <StackPanel>
+                        <!-- Логин -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Логин"
+                                      FontFamily="supporting-text"
+                                      FontSize="14"
+                                      FontWeight="SemiBold"
+                                      Foreground="#333333"
+                                      Margin="0,0,0,5"/>
+                            <TextBox x:Name="LoginTextBox"
+                                     FontFamily="supporting-text"
+                                     FontSize="14"
+                                     Padding="10,8"
+                                     BorderThickness="1"
+                                     BorderBrush="#CCCCCC"
+                                     Background="White"/>
+                            <TextBlock Text="Стандартный вид логина фамилия, имя (одна буква), отчество (одна буква)"
+                                      FontFamily="supporting-text"
+                                      FontSize="12"
+                                      Foreground="#999999"
+                                      Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <!-- Пароль -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="Пароль"
+                                      FontFamily="supporting-text"
+                                      FontSize="14"
+                                      FontWeight="SemiBold"
+                                      Foreground="#333333"
+                                      Margin="0,0,0,5"/>
+                            <PasswordBox x:Name="PasswordBox"
+                                         FontFamily="supporting-text"
+                                         FontSize="14"
+                                         Padding="10,8"
+                                         BorderThickness="1"
+                                         BorderBrush="#CCCCCC"
+                                         Background="White"/>
+                            <TextBlock Text="Используйте пароль, выданный администратором"
+                                      FontFamily="supporting-text"
+                                      FontSize="12"
+                                      Foreground="#999999"
+                                      Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <!-- ФИО -->
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="ФИО"
+                                      FontFamily="supporting-text"
+                                      FontSize="14"
+                                      FontWeight="SemiBold"
+                                      Foreground="#333333"
+                                      Margin="0,0,0,5"/>
+                            <TextBox x:Name="FullNameTextBox"
+                                     FontFamily="supporting-text"
+                                     FontSize="14"
+                                     Padding="10,8"
+                                     BorderThickness="1"
+                                     BorderBrush="#CCCCCC"
+                                     Background="White"/>
+                            <TextBlock Text="Фамилия, имя и отчество"
+                                      FontFamily="supporting-text"
+                                      FontSize="12"
+                                      Foreground="#999999"
+                                      Margin="0,5,0,0"/>
+                        </StackPanel>
+
+                        <!-- Роли и права -->
+                        <StackPanel Margin="0,0,0,30">
+                            <TextBlock Text="Назначить роли и права сотрудника"
+                                      FontFamily="supporting-text"
+                                      FontSize="14"
+                                      FontWeight="Bold"
+                                      Foreground="#333333"
+                                      Margin="0,0,0,15"/>
+                            <StackPanel>
+                                <!-- Директор -->
+                                <Border x:Name="DirectorRoleBorder"
+Background="White" 
+BorderThickness="1" 
+BorderBrush="#E0E0E0"
+CornerRadius="8"
+Padding="15"
+Margin="0,0,0,10"
+Cursor="Hand"
+MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+        Width="24"
+        Height="24"
+        Background="#65558F"
+        CornerRadius="4"
+        Margin="0,0,15,0">
+                                            <TextBlock Text="💼"
+              FontSize="12"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Директор"
+              FontFamily="supporting-text"
+              FontSize="14"
+              FontWeight="SemiBold"
+              Foreground="#333333"/>
+                                            <TextBlock Text="Доступ к управлению и отчетам"
+              FontFamily="supporting-text"
+              FontSize="11"
+              Foreground="#666666"
+              Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <RadioButton x:Name="DirectorRoleRadio"
+             Grid.Column="2"
+             VerticalAlignment="Center"
+             GroupName="RoleGroup"
+             Checked="RoleRadioButton_Checked">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                Width="40"
+                                Height="20"
+                                Background="#CCCCCC"
+                                CornerRadius="10"
+                                Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                    Width="16"
+                                    Height="16"
+                                    Background="White"
+                                    CornerRadius="8"
+                                    HorizontalAlignment="Left"
+                                    Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+                                <!-- Администратор -->
+                                <Border x:Name="AdminRoleBorder"
+                                        Background="White" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#E0E0E0"
+                                        CornerRadius="8"
+                                        Padding="15"
+                                        Margin="0,0,0,10"
+                                        Cursor="Hand"
+                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Width="24"
+                                                Height="24"
+                                                Background="#65558F"
+                                                CornerRadius="4"
+                                                Margin="0,0,15,0">
+                                            <TextBlock Text="👑"
+                                                      FontSize="12"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Администратор"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="14"
+                                                      FontWeight="SemiBold"
+                                                      Foreground="#333333"/>
+                                            <TextBlock Text="Полный доступ к системе"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="11"
+                                                      Foreground="#666666"
+                                                      Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <RadioButton x:Name="AdminRoleRadio"
+                                                     Grid.Column="2"
+                                                     VerticalAlignment="Center"
+                                                     GroupName="RoleGroup"
+                                                     Checked="RoleRadioButton_Checked">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                                                        Width="40"
+                                                                        Height="20"
+                                                                        Background="#CCCCCC"
+                                                                        CornerRadius="10"
+                                                                        Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                                                            Width="16"
+                                                                            Height="16"
+                                                                            Background="White"
+                                                                            CornerRadius="8"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+                               
+
+
+                                <!-- Исполнитель -->
+                                <Border x:Name="ExecutorRoleBorder"
+                                        Background="#F0F0F0" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#65558F"
+                                        CornerRadius="8"
+                                        Padding="15"
+                                        Cursor="Hand"
+                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Width="24"
+                                                Height="24"
+                                                Background="#65558F"
+                                                CornerRadius="4"
+                                                Margin="0,0,15,0">
+                                            <TextBlock Text="👤"
+                                                      FontSize="12"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Исполнитель"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="14"
+                                                      FontWeight="SemiBold"
+                                                      Foreground="#333333"/>
+                                            <TextBlock Text="Базовый доступ к задачам"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="11"
+                                                      Foreground="#666666"
+                                                      Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <RadioButton x:Name="ExecutorRoleRadio"
+                                                     Grid.Column="2"
+                                                     VerticalAlignment="Center"
+                                                     GroupName="RoleGroup"
+                                                     IsChecked="True"
+                                                     Checked="RoleRadioButton_Checked">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                                                        Width="40"
+                                                                        Height="20"
+                                                                        Background="#65558F"
+                                                                        CornerRadius="10"
+                                                                        Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                                                            Width="16"
+                                                                            Height="16"
+                                                                            Background="White"
+                                                                            CornerRadius="8"
+                                                                            HorizontalAlignment="Right"
+                                                                            Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="False">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#CCCCCC"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Left"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Кнопки действий -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                            <Button Content="Создать"
+                                    Style="{StaticResource WhiteActionButtonStyle}"
+                                    Click="CreateButton_Click"
+                                    Margin="0,0,15,0"
+                                    Width="100"
+                                    Height="36"/>
+                            <Button Content="Отменить"
+                                    Style="{StaticResource WhiteActionButtonStyle}"
+                                    Click="CancelButton_Click"
+                                    Width="100"
+                                    Height="36"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Правая часть - зарегистрированные пользователи -->
+                <Border Grid.Column="1" 
+                        Background="#FFFFFF" 
+                        CornerRadius="10" 
+                        BorderThickness="1" 
+                        BorderBrush="#E0E0E0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" 
+                                Background="#F8F8F8" 
+                                Padding="20" 
+                                CornerRadius="10,10,0,0">
+                            <TextBlock Text="Зарегистрированные пользователи"
+                                      FontFamily="supporting-text"
+                                      FontSize="16"
+                                      FontWeight="Bold"
+                                      Foreground="#333333"/>
+                        </Border>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="EmployeesStackPanel" Margin="20">
+                                <!-- Существующие пользователи будут добавляться здесь через код -->
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,151 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|c:\\users\\jekag\\source\\repos\\wpfapp1\\wpfapp1\\taskscalendarwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\taskscalendarwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|C:\\Users\\jekag\\source\\repos\\WpfApp1\\wpfapp1\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|c:\\users\\jekag\\source\\repos\\wpfapp1\\wpfapp1\\taskscalendarwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\taskscalendarwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|c:\\users\\jekag\\source\\repos\\wpfapp1\\wpfapp1\\maindashboardwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\maindashboardwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|c:\\users\\jekag\\source\\repos\\wpfapp1\\wpfapp1\\maindashboardwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\maindashboardwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|C:\\Users\\jekag\\source\\repos\\WpfApp1\\wpfapp1\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|C:\\Users\\jekag\\source\\repos\\WpfApp1\\wpfapp1\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|C:\\Users\\jekag\\source\\repos\\WpfApp1\\wpfapp1\\commentwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4173FDB6-3ACC-49FE-AC9A-717DFBF70E1F}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\commentwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TasksCalendarWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\TasksCalendarWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\TasksCalendarWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\TasksCalendarWindow.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\TasksCalendarWindow.xaml.cs",
+              "ViewState": "AgIAAIwAAAAAAAAAAADwv5QAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T18:17:24.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TasksCalendarWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\TasksCalendarWindow.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\TasksCalendarWindow.xaml",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\TasksCalendarWindow.xaml",
+              "RelativeToolTip": "WpfApp1\\TasksCalendarWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-15T18:17:18.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainDashboardWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\MainDashboardWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\MainDashboardWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\MainDashboardWindow.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\MainDashboardWindow.xaml.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAowDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T18:13:21.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainDashboardWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\MainDashboardWindow.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\MainDashboardWindow.xaml",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\MainDashboardWindow.xaml",
+              "RelativeToolTip": "WpfApp1\\MainDashboardWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-15T18:13:15.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Repositories\\TaskRepository.cs",
+              "RelativeToolTip": "WpfApp1\\Repositories\\TaskRepository.cs",
+              "ViewState": "AgIAACoBAAAAAAAAAADwvzgBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T16:34:34.553Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Models\\Task.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Models\\Task.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Models\\Task.cs",
+              "RelativeToolTip": "WpfApp1\\Models\\Task.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowA8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T15:51:27.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\Models\\Notification.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\Models\\Notification.cs",
+              "RelativeToolTip": "WpfApp1\\Models\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T15:51:24.578Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CommentWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\CommentWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\CommentWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\jekag\\source\\repos\\WpfApp1\\WpfApp1\\CommentWindow.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\CommentWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T15:33:08.433Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
