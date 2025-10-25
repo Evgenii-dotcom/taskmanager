@@ -37,7 +37,7 @@ namespace WpfApp1
         private void LoadTasks()
         {
             var currentUser = App.CurrentUser;
-            if (currentUser.Role == "admin" || currentUser.Role == "director")
+            if (currentUser.Role == "admin" || currentUser.Role == "director" || currentUser.Role == "manager")
             {
                 _allTasks = _taskRepository.GetAllTasks(); // Нужно реализовать метод в TaskRepository
             }

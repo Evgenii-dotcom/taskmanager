@@ -43,16 +43,33 @@ namespace WpfApp1
             var currentUser = App.CurrentUser;
             if (currentUser == null) return;
 
-            if (currentUser.Role == "executor")
+            // Кнопка "Сотрудники" - ТОЛЬКО для администратора
+            if (currentUser.Role == "admin")
+            {
+                EmployeesButton.Visibility = Visibility.Visible;
+            }
+            else
             {
                 EmployeesButton.Visibility = Visibility.Collapsed;
-                // Executor не может добавлять задачи, скрываем кнопку
+            }
+
+            // Кнопка "Добавить задачу" - ТОЛЬКО для manager и director
+            if (currentUser.Role == "manager" || currentUser.Role == "director")
+            {
+                AddTasksButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
                 AddTasksButton.Visibility = Visibility.Collapsed;
             }
 
-            // Для директора и других ролей кнопка будет видна, ничего не скрываем
+            // Для исполнителя скрываем обе кнопки
+            if (currentUser.Role == "executor")
+            {
+                EmployeesButton.Visibility = Visibility.Collapsed;
+                AddTasksButton.Visibility = Visibility.Collapsed;
+            }
         }
-
 
         private void LoadNotifications()
         {

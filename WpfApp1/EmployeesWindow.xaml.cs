@@ -14,12 +14,31 @@ namespace WpfApp1
 
         public EmployeesWindow()
         {
-            InitializeComponent();
-            _employeeRepository = new EmployeeRepository();
+            try
+            {
+                InitializeComponent();
+                _employeeRepository = new EmployeeRepository();
 
-            LoadCurrentUser();
-            LoadEmployees();
+                // Добавляем обработчики после инициализации
+                ExecutorRoleRadio.Checked += RoleRadioButton_Checked;
+                ManagerRoleRadio.Checked += RoleRadioButton_Checked;
+                AdminRoleRadio.Checked += RoleRadioButton_Checked;
+                DirectorRoleRadio.Checked += RoleRadioButton_Checked;
+
+                LoadCurrentUser();
+                LoadEmployees();
+
+                // Обновляем стили после загрузки
+                UpdateRoleBorders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при создании окна сотрудников: {ex.Message}", "Критическая ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
+
 
         private void LoadCurrentUser()
         {
@@ -121,6 +140,10 @@ namespace WpfApp1
 
                 case "director":
                     brush = new SolidColorBrush(Color.FromRgb(30, 136, 229)); // синий
+                    break;
+
+                case "manager": 
+                    brush = new SolidColorBrush(Color.FromRgb(255, 152, 0)); // оранжевый
                     break;
 
                 default:
@@ -259,6 +282,8 @@ namespace WpfApp1
                     role = "admin";
                 else if (DirectorRoleRadio.IsChecked == true)
                     role = "director";
+                else if (ManagerRoleRadio.IsChecked == true)
+                    role = "manager";
 
 
                 if (string.IsNullOrWhiteSpace(login) ||
@@ -323,6 +348,8 @@ namespace WpfApp1
                     ExecutorRoleRadio.IsChecked = true;
                 else if (border.Name == "DirectorRoleBorder")
                     DirectorRoleRadio.IsChecked = true;
+                else if (border.Name == "ManagerRoleBorder") 
+                    ManagerRoleRadio.IsChecked = true;
             }
             UpdateRoleBorders();
         }
@@ -338,6 +365,9 @@ namespace WpfApp1
             ExecutorRoleBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(224, 224, 224));
             ExecutorRoleBorder.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
 
+            ManagerRoleBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(224, 224, 224)); 
+            ManagerRoleBorder.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));  
+
             if (DirectorRoleRadio.IsChecked == true)
             {
                 DirectorRoleBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(30, 136, 229)); // синий
@@ -352,6 +382,11 @@ namespace WpfApp1
             {
                 ExecutorRoleBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(101, 85, 143));
                 ExecutorRoleBorder.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+            }
+            else if (ManagerRoleRadio.IsChecked == true) 
+            {
+                ManagerRoleBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(101, 85, 143));
+                ManagerRoleBorder.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
             }
         }
     }

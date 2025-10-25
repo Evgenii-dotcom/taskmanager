@@ -22,6 +22,8 @@ namespace WpfApp1.Models
                         return "Администратор";
                     case "director":
                         return "Директор";
+                    case "manager":
+                        return "Начальник отдела";
                     default:
                         return "Исполнитель";
                 }

@@ -281,6 +281,242 @@
                                       Foreground="#333333"
                                       Margin="0,0,0,15"/>
                             <StackPanel>
+                                <!-- Исполнитель -->
+                                <Border x:Name="ExecutorRoleBorder"
+                                        Background="#F0F0F0" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#65558F"
+                                        CornerRadius="8"
+                                        Padding="15"
+                                        Cursor="Hand"
+                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Width="24"
+                                                Height="24"
+                                                Background="#65558F"
+                                                CornerRadius="4"
+                                                Margin="0,0,15,0">
+                                            <TextBlock Text="👤"
+                                                      FontSize="12"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Исполнитель"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="14"
+                                                      FontWeight="SemiBold"
+                                                      Foreground="#333333"/>
+                                            <TextBlock Text="Базовый доступ к задачам"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="11"
+                                                      Foreground="#666666"
+                                                      Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <RadioButton x:Name="ExecutorRoleRadio"
+             Grid.Column="2"
+             VerticalAlignment="Center"
+             GroupName="RoleGroup"
+             IsChecked="True">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                                                        Width="40"
+                                                                        Height="20"
+                                                                        Background="#65558F"
+                                                                        CornerRadius="10"
+                                                                        Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                                                            Width="16"
+                                                                            Height="16"
+                                                                            Background="White"
+                                                                            CornerRadius="8"
+                                                                            HorizontalAlignment="Right"
+                                                                            Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="False">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#CCCCCC"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Left"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+                                
+                                <!-- Начальник отдела -->
+                                <Border x:Name="ManagerRoleBorder"
+        Background="White" 
+        BorderThickness="1" 
+        BorderBrush="#E0E0E0"
+        CornerRadius="8"
+        Padding="15"
+        Margin="0,0,0,10"
+        Cursor="Hand"
+        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0"
+                Width="24"
+                Height="24"
+                Background="#65558F"
+                CornerRadius="4"
+                Margin="0,0,15,0">
+                                            <TextBlock Text="🏢"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Начальник отдела"
+                       FontFamily="supporting-text"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Foreground="#333333"/>
+                                            <TextBlock Text="Доступ к управлению своим отделом"
+                       FontFamily="supporting-text"
+                       FontSize="11"
+                       Foreground="#666666"
+                       Margin="0,2,0,0"/>
+                                        </StackPanel>
+
+                                        <RadioButton x:Name="ManagerRoleRadio"
+             Grid.Column="2"
+             VerticalAlignment="Center"
+             GroupName="RoleGroup">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                        Width="40"
+                                        Height="20"
+                                        Background="#CCCCCC"
+                                        CornerRadius="10"
+                                        Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                            Width="16"
+                                            Height="16"
+                                            Background="White"
+                                            CornerRadius="8"
+                                            HorizontalAlignment="Left"
+                                            Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+
+
+                                <!-- Администратор -->
+                                <Border x:Name="AdminRoleBorder"
+                                        Background="White" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#E0E0E0"
+                                        CornerRadius="8"
+                                        Padding="15"
+                                        Margin="0,0,0,10"
+                                        Cursor="Hand"
+                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Width="24"
+                                                Height="24"
+                                                Background="#65558F"
+                                                CornerRadius="4"
+                                                Margin="0,0,15,0">
+                                            <TextBlock Text="👑"
+                                                      FontSize="12"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="Администратор"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="14"
+                                                      FontWeight="SemiBold"
+                                                      Foreground="#333333"/>
+                                            <TextBlock Text="Полный доступ к системе"
+                                                      FontFamily="supporting-text"
+                                                      FontSize="11"
+                                                      Foreground="#666666"
+                                                      Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                        <RadioButton x:Name="AdminRoleRadio"
+             Grid.Column="2"
+             VerticalAlignment="Center"
+             GroupName="RoleGroup">
+                                            <RadioButton.Style>
+                                                <Style TargetType="RadioButton">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="RadioButton">
+                                                                <Border x:Name="outerBorder"
+                                                                        Width="40"
+                                                                        Height="20"
+                                                                        Background="#CCCCCC"
+                                                                        CornerRadius="10"
+                                                                        Margin="5">
+                                                                    <Border x:Name="innerCircle"
+                                                                            Width="16"
+                                                                            Height="16"
+                                                                            Background="White"
+                                                                            CornerRadius="8"
+                                                                            HorizontalAlignment="Left"
+                                                                            Margin="2"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
+                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </RadioButton.Style>
+                                        </RadioButton>
+                                    </Grid>
+                                </Border>
+                               
+
                                 <!-- Директор -->
                                 <Border x:Name="DirectorRoleBorder"
 Background="White" 
@@ -323,8 +559,7 @@ MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
                                         <RadioButton x:Name="DirectorRoleRadio"
              Grid.Column="2"
              VerticalAlignment="Center"
-             GroupName="RoleGroup"
-             Checked="RoleRadioButton_Checked">
+             GroupName="RoleGroup">
                                             <RadioButton.Style>
                                                 <Style TargetType="RadioButton">
                                                     <Setter Property="Template">
@@ -348,163 +583,6 @@ MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
                                                                     <Trigger Property="IsChecked" Value="True">
                                                                         <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
                                                                         <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </RadioButton.Style>
-                                        </RadioButton>
-                                    </Grid>
-                                </Border>
-                                <!-- Администратор -->
-                                <Border x:Name="AdminRoleBorder"
-                                        Background="White" 
-                                        BorderThickness="1" 
-                                        BorderBrush="#E0E0E0"
-                                        CornerRadius="8"
-                                        Padding="15"
-                                        Margin="0,0,0,10"
-                                        Cursor="Hand"
-                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0"
-                                                Width="24"
-                                                Height="24"
-                                                Background="#65558F"
-                                                CornerRadius="4"
-                                                Margin="0,0,15,0">
-                                            <TextBlock Text="👑"
-                                                      FontSize="12"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock Text="Администратор"
-                                                      FontFamily="supporting-text"
-                                                      FontSize="14"
-                                                      FontWeight="SemiBold"
-                                                      Foreground="#333333"/>
-                                            <TextBlock Text="Полный доступ к системе"
-                                                      FontFamily="supporting-text"
-                                                      FontSize="11"
-                                                      Foreground="#666666"
-                                                      Margin="0,2,0,0"/>
-                                        </StackPanel>
-                                        <RadioButton x:Name="AdminRoleRadio"
-                                                     Grid.Column="2"
-                                                     VerticalAlignment="Center"
-                                                     GroupName="RoleGroup"
-                                                     Checked="RoleRadioButton_Checked">
-                                            <RadioButton.Style>
-                                                <Style TargetType="RadioButton">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="RadioButton">
-                                                                <Border x:Name="outerBorder"
-                                                                        Width="40"
-                                                                        Height="20"
-                                                                        Background="#CCCCCC"
-                                                                        CornerRadius="10"
-                                                                        Margin="5">
-                                                                    <Border x:Name="innerCircle"
-                                                                            Width="16"
-                                                                            Height="16"
-                                                                            Background="White"
-                                                                            CornerRadius="8"
-                                                                            HorizontalAlignment="Left"
-                                                                            Margin="2"/>
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsChecked" Value="True">
-                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#65558F"/>
-                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Right"/>
-                                                                    </Trigger>
-                                                                </ControlTemplate.Triggers>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </RadioButton.Style>
-                                        </RadioButton>
-                                    </Grid>
-                                </Border>
-                               
-
-
-                                <!-- Исполнитель -->
-                                <Border x:Name="ExecutorRoleBorder"
-                                        Background="#F0F0F0" 
-                                        BorderThickness="1" 
-                                        BorderBrush="#65558F"
-                                        CornerRadius="8"
-                                        Padding="15"
-                                        Cursor="Hand"
-                                        MouseLeftButtonDown="RoleBorder_MouseLeftButtonDown">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0"
-                                                Width="24"
-                                                Height="24"
-                                                Background="#65558F"
-                                                CornerRadius="4"
-                                                Margin="0,0,15,0">
-                                            <TextBlock Text="👤"
-                                                      FontSize="12"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock Text="Исполнитель"
-                                                      FontFamily="supporting-text"
-                                                      FontSize="14"
-                                                      FontWeight="SemiBold"
-                                                      Foreground="#333333"/>
-                                            <TextBlock Text="Базовый доступ к задачам"
-                                                      FontFamily="supporting-text"
-                                                      FontSize="11"
-                                                      Foreground="#666666"
-                                                      Margin="0,2,0,0"/>
-                                        </StackPanel>
-                                        <RadioButton x:Name="ExecutorRoleRadio"
-                                                     Grid.Column="2"
-                                                     VerticalAlignment="Center"
-                                                     GroupName="RoleGroup"
-                                                     IsChecked="True"
-                                                     Checked="RoleRadioButton_Checked">
-                                            <RadioButton.Style>
-                                                <Style TargetType="RadioButton">
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="RadioButton">
-                                                                <Border x:Name="outerBorder"
-                                                                        Width="40"
-                                                                        Height="20"
-                                                                        Background="#65558F"
-                                                                        CornerRadius="10"
-                                                                        Margin="5">
-                                                                    <Border x:Name="innerCircle"
-                                                                            Width="16"
-                                                                            Height="16"
-                                                                            Background="White"
-                                                                            CornerRadius="8"
-                                                                            HorizontalAlignment="Right"
-                                                                            Margin="2"/>
-                                                                </Border>
-                                                                <ControlTemplate.Triggers>
-                                                                    <Trigger Property="IsChecked" Value="False">
-                                                                        <Setter TargetName="outerBorder" Property="Background" Value="#CCCCCC"/>
-                                                                        <Setter TargetName="innerCircle" Property="HorizontalAlignment" Value="Left"/>
                                                                     </Trigger>
                                                                 </ControlTemplate.Triggers>
                                                             </ControlTemplate>

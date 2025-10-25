@@ -16,23 +16,23 @@ namespace WpfApp1.Repositories
             // Сначала загружаем сохраненные уведомления из БД
             var savedNotifications = GetSavedNotifications();
 
-            if (user.Role == "admin" || user.Role == "director")
+            if (user.Role == "admin" || user.Role == "director"  || user.Role == "manager")
             {
-                // Для администратора и директора - завершенные задачи
+                // Загружаем завершенные задачи
                 var completedTasks = _taskRepo.GetAllCompletedTasks();
                 foreach (var task in completedTasks)
                 {
-                    // Проверяем, нет ли уже уведомления для этой задачи
-                    if (!IsNotificationExists(savedNotifications, task.Id, "completed"))
+                    // Только если текущий пользователь — автор задачи
+                    if (task.CreatedBy == user.Id && !IsNotificationExists(savedNotifications, task.Id, "completed"))
                     {
                         notifications.Add(new Notification
                         {
-                            Id = GenerateNotificationId(), // Генерируем временный ID
+                            Id = GenerateNotificationId(), // Временный ID для UI
                             TaskId = task.Id,
                             TaskNumber = task.TaskNumber,
                             Status = "completed",
                             Deadline = task.DeadlineDate,
-                            Message = $"Задача {task.TaskNumber} сдана исполнителем {task.AssignedEmployee?.FullName ?? "Неизвестно"}",
+                            Message = $"Задача {task.TaskNumber} была выполнена исполнителем {task.AssignedEmployee?.FullName ?? "Неизвестно"}",
                             CreatedAt = DateTime.Now,
                             IsRead = false,
                             NotificationType = "completed_task"

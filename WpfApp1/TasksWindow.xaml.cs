@@ -29,7 +29,7 @@ namespace WpfApp1
             SetupForUserRole();
 
             // Загружаем сотрудников ДО загрузки задач
-            if (App.CurrentUser?.Role == "admin")
+            if (IsManagerRole()) // Объединенная проверка для admin/director/manager
             {
                 LoadEmployeesForFilter();
             }
@@ -55,12 +55,27 @@ namespace WpfApp1
             }
         }
 
+        // Объединенная проверка для ролей с правами управления
+        private bool IsManagerRole()
+        {
+            var currentUser = App.CurrentUser;
+            return currentUser != null &&
+                   (currentUser.Role == "admin" || currentUser.Role == "director" || currentUser.Role == "manager");
+        }
+
+        // Проверка является ли пользователь исполнителем
+        private bool IsExecutorRole()
+        {
+            var currentUser = App.CurrentUser;
+            return currentUser != null && currentUser.Role == "executor";
+        }
+
         private void SetupForUserRole()
         {
             var currentUser = App.CurrentUser;
             if (currentUser != null)
             {
-                if (currentUser.Role == "admin")
+                if (IsManagerRole())
                 {
                     TasksSubtitleText.Text = "Просмотр всех задач сотрудников";
                     EmployeeFilterComboBox.Visibility = Visibility.Visible;
@@ -100,7 +115,6 @@ namespace WpfApp1
             }
         }
 
-
         private void LoadTasks()
         {
             try
@@ -108,9 +122,9 @@ namespace WpfApp1
                 var currentUser = App.CurrentUser;
                 if (currentUser == null) return;
 
-                if (currentUser.Role == "admin" || currentUser.Role == "director")
+                if (IsManagerRole())
                 {
-                    _allTasks = GetAllTasksForAdmin();
+                    _allTasks = GetAllTasksForManager();
                 }
                 else
                 {
@@ -126,7 +140,7 @@ namespace WpfApp1
             }
         }
 
-        private List<Task> GetAllTasksForAdmin()
+        private List<Task> GetAllTasksForManager()
         {
             var tasks = new List<Task>();
 
@@ -208,7 +222,7 @@ namespace WpfApp1
                 case "completed":
                     filteredTasks = filteredTasks.Where(t => t.Status == "completed");
                     break;
-                case "accepted": // Новый фильтр
+                case "accepted":
                     filteredTasks = filteredTasks.Where(t => t.Status == "accepted");
                     break;
                 case "overdue":
@@ -228,21 +242,22 @@ namespace WpfApp1
                     (t.Title != null && t.Title.IndexOf(_searchText, StringComparison.OrdinalIgnoreCase) >= 0));
             }
 
-            // Применяем фильтр по сотруднику (только для администратора)
-            if (App.CurrentUser?.Role == "admin" &&
+            // Применяем фильтр по сотруднику (только для управляющих ролей)
+            if (IsManagerRole() &&
                 EmployeeFilterComboBox.SelectedItem is Employee selectedEmployee &&
                 selectedEmployee.Id != 0)
             {
                 filteredTasks = filteredTasks.Where(t => t.AssignedTo == selectedEmployee.Id);
             }
+
             var statusOrder = new List<string> { "not_accepted", "in_progress", "completed", "accepted", "overdue" };
 
             filteredTasks = filteredTasks
                 .OrderBy(t => statusOrder.IndexOf(t.Status))
                 .ThenBy(t => t.DeadlineDate)
                 .ToList();
-            var filteredList = UpdateTaskStatuses(filteredTasks.ToList());
 
+            var filteredList = UpdateTaskStatuses(filteredTasks.ToList());
 
             // Создаем отображаемые модели
             var displayTasks = filteredList
@@ -295,7 +310,7 @@ namespace WpfApp1
             switch (status)
             {
                 case "completed": return "Сдано";
-                case "accepted": return "Выполнено"; // Новый статус
+                case "accepted": return "Выполнено";
                 case "overdue": return "Просрочка";
                 case "in_progress": return "В работе";
                 case "not_accepted": return "Не принята";
@@ -316,7 +331,7 @@ namespace WpfApp1
                     case "Все задачи": _currentFilter = "all"; break;
                     case "Активные": _currentFilter = "active"; break;
                     case "Сданные": _currentFilter = "completed"; break;
-                    case "Выполненные": _currentFilter = "accepted"; break; // Новый фильтр
+                    case "Выполненные": _currentFilter = "accepted"; break;
                     case "Просроченные": _currentFilter = "overdue"; break;
                     default: _currentFilter = "all"; break;
                 }
@@ -330,7 +345,7 @@ namespace WpfApp1
             AllTasksButton.Style = (Style)FindResource("FilterButtonStyle");
             ActiveTasksButton.Style = (Style)FindResource("FilterButtonStyle");
             CompletedTasksButton.Style = (Style)FindResource("FilterButtonStyle");
-            AcceptedTasksButton.Style = (Style)FindResource("FilterButtonStyle"); // Новая кнопка
+            AcceptedTasksButton.Style = (Style)FindResource("FilterButtonStyle");
             OverdueTasksButton.Style = (Style)FindResource("FilterButtonStyle");
         }
 
@@ -379,7 +394,7 @@ namespace WpfApp1
                 ResetActionButtons();
 
                 // Настройка для исполнителя
-                if (currentUser.Role == "executor" &&
+                if (IsExecutorRole() &&
                     task.AssignedTo == currentUser.Id &&
                     (task.Status == "in_progress" || task.Status == "not_accepted" || task.Status == "overdue"))
                 {
@@ -393,9 +408,8 @@ namespace WpfApp1
                         AcceptRejectedTaskButton.Visibility = Visibility.Visible;
                     }
                 }
-                // Настройка для администратора/директора
-                
-                else if ((currentUser.Role == "admin" || currentUser.Role == "director") && task.Status == "completed")
+                // Настройка для управляющих ролей (admin/director/manager)
+                else if (IsManagerRole() && task.Status == "completed" && task.CreatedBy == currentUser.Id)
                 {
                     TaskActionsPanel.Visibility = Visibility.Visible;
                     ApproveTaskButton.Visibility = Visibility.Visible;
@@ -418,7 +432,6 @@ namespace WpfApp1
             }
         }
 
-        // Добавьте этот метод для сброса всех кнопок
         private void ResetActionButtons()
         {
             UploadReportButton.Visibility = Visibility.Collapsed;
@@ -427,11 +440,11 @@ namespace WpfApp1
             RejectTaskButton.Visibility = Visibility.Collapsed;
             AcceptRejectedTaskButton.Visibility = Visibility.Collapsed;
         }
+
         private void ApproveTaskButton_Click(object sender, RoutedEventArgs e)
         {
             if (TasksListView.SelectedItem is TaskDisplayModel selectedTask)
             {
-                // Используем новый метод AcceptTask вместо UpdateTaskStatus
                 bool success = _taskRepository.AcceptTask(selectedTask.OriginalTask.Id);
                 if (success)
                 {
@@ -454,7 +467,6 @@ namespace WpfApp1
         {
             if (TasksListView.SelectedItem is TaskDisplayModel selectedTask)
             {
-                // Окно для комментария
                 var commentWindow = new CommentWindow();
                 if (commentWindow.ShowDialog() == true)
                 {
@@ -485,7 +497,6 @@ namespace WpfApp1
                 }
             }
         }
-
 
         private void HideTaskDetails()
         {
